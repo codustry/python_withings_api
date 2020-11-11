@@ -11,7 +11,14 @@ here: <http://developer.withings.com/oauth2/>
 
 ## Installation
 
-    pip install withings-api
+```
+[[tool.poetry.source]]
+url = "https://pypi.fury.io/codustry/"
+name = "fury"
+
+[tool.poetry.dependencies]
+withings_api = { version = "*", source = "fury" }
+```
 
 ## Usage
 For a complete example, checkout the integration test in `scripts/integration_test.py`. It has a working example on how to use the API.
