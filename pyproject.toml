@@ -1,18 +1,21 @@
 [tool.poetry]
-name = "withings_api"
-version = "2.1.9"
-description = "Library for the Withings API"
+name = "withings_api_cdt"
+version = "2.3.0"
+description = "Codustry Fork of withings_api"
+
+packages = [
+    { include = "withings_api" }
+]
 
 license = "MIT"
 
 authors = [
-    "Robbie Van Gorkom <robbie.van.gorkom@protonmail.com>"
+    "Nutchanon Ninyawee <nutchanon@codustry.com>"
 ]
 
 readme = 'README.md'
 
-repository = "https://github.com/vangorra/python_withings_api"
-homepage = "https://github.com/vangorra/python_withings_api"
+repository = "https://github.com/codustry/python_withings_api"
 
 keywords = ['withings', 'api']
 
@@ -22,6 +25,8 @@ arrow = ">=0.15.2"
 requests-oauth = ">=0.4.1"
 requests-oauthlib = ">=1.2"
 typing-extensions = ">=3.7.4.2"
+pydantic = "^1.7.2"
+autoname = "^0.1.2"
 
 [tool.poetry.dev-dependencies]
 bandit = "==1.6.2"
