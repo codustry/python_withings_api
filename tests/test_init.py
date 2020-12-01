@@ -8,7 +8,7 @@ import arrow
 import pytest
 import responses
 from typing_extensions import Final
-from withings_api import WithingsApi, WithingsAuth
+from withings_api import NotifyAppli, NotifyGetResponse, NotifyListResponse, WithingsApi, WithingsAuth
 from withings_api.common import (
     AfibClassification,
     AuthScope,
@@ -33,10 +33,6 @@ from withings_api.common import (
     MeasureGetMeasMeasure,
     MeasureGetMeasResponse,
     MeasureType,
-    NotifyAppli,
-    NotifyGetResponse,
-    NotifyListProfile,
-    NotifyListResponse,
     SleepGetResponse,
     SleepGetSerie,
     SleepGetSummaryResponse,
@@ -46,6 +42,7 @@ from withings_api.common import (
     UserGetDeviceDevice,
     UserGetDeviceResponse,
 )
+from withings_api.models.notify import NotifyListProfile
 
 from .common import TIMEZONE0, TIMEZONE1, TIMEZONE_STR0, TIMEZONE_STR1
 

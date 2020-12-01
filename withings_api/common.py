@@ -121,23 +121,6 @@ def new_measure_type(value: Optional[int]) -> MeasureType:
     return cast(MeasureType, enum_or_raise(value, MeasureType))
 
 
-class NotifyAppli(IntEnum):
-    """Data to notify_subscribe to."""
-
-    WEIGHT = 1
-    CIRCULATORY = 4
-    ACTIVITY = 16
-    SLEEP = 44
-    USER = 46
-    BED_IN = 50
-    BED_OUT = 51
-
-
-def new_notify_appli(value: Optional[int]) -> NotifyAppli:
-    """Create enum based on primitive."""
-    return cast(NotifyAppli, enum_or_raise(value, NotifyAppli))
-
-
 class GetActivityField(Enum):
     """Fields for the getactivity api call."""
 
@@ -441,29 +424,6 @@ class Credentials(NamedTuple):
     consumer_secret: str
 
 
-class NotifyListProfile(NamedTuple):
-    """NotifyListProfile."""
-
-    appli: NotifyAppli
-    callbackurl: str
-    expires: Optional[Arrow]
-    comment: Optional[str]
-
-
-class NotifyListResponse(NamedTuple):
-    """NotifyListResponse."""
-
-    profiles: Tuple[NotifyListProfile, ...]
-
-
-class NotifyGetResponse(NamedTuple):
-    """NotifyGetResponse."""
-
-    appli: NotifyAppli
-    callbackurl: str
-    comment: Optional[str]
-
-
 GenericType = TypeVar("GenericType")
 
 
@@ -612,32 +572,6 @@ def new_user_get_device_response(data: dict) -> UserGetDeviceResponse:
     """Create GetDeviceResponse from json."""
     return UserGetDeviceResponse(
         devices=_flexible_tuple_of(data.get("devices", ()), new_user_get_device_device)
-    )
-
-
-def new_notify_list_profile(data: dict) -> NotifyListProfile:
-    """Create ListSubscriptionProfile from json."""
-    return NotifyListProfile(
-        appli=new_notify_appli(data.get("appli")),
-        callbackurl=str_or_raise(data.get("callbackurl")),
-        expires=arrow_or_none(data.get("expires")),
-        comment=str_or_none(data.get("comment")),
-    )
-
-
-def new_notify_list_response(data: dict) -> NotifyListResponse:
-    """Create NotifyListResponse from json."""
-    return NotifyListResponse(
-        profiles=_flexible_tuple_of(data.get("profiles", ()), new_notify_list_profile)
-    )
-
-
-def new_notify_get_response(data: dict) -> NotifyGetResponse:
-    """Create NotifyGetResponse from json."""
-    return NotifyGetResponse(
-        appli=new_notify_appli(data.get("appli")),
-        callbackurl=str_or_raise(data.get("callbackurl")),
-        comment=str_or_none(data.get("comment")),
     )
 
 

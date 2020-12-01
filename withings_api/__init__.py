@@ -26,9 +26,6 @@ from .common import (
     MeasureGetMeasGroupCategory,
     MeasureGetMeasResponse,
     MeasureType,
-    NotifyAppli,
-    NotifyGetResponse,
-    NotifyListResponse,
     SleepGetResponse,
     SleepGetSummaryResponse,
     UserGetDeviceResponse,
@@ -38,14 +35,14 @@ from .common import (
     new_heart_list_response,
     new_measure_get_activity_response,
     new_measure_get_meas_response,
-    new_notify_get_response,
-    new_notify_list_response,
     new_sleep_get_response,
     new_sleep_get_summary_response,
     new_user_get_device_response,
     response_body_or_raise,
     str_or_raise,
 )
+from .models.notify import new_notify_get_response, new_notify_list_response, NotifyAppli, NotifyGetResponse, \
+    NotifyListResponse
 
 DateType = Union[arrow.Arrow, datetime.date, datetime.datetime, int, str]
 ParamsType = Dict[str, Union[str, int, bool]]
