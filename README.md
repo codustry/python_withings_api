@@ -12,12 +12,7 @@ here: <http://developer.withings.com/oauth2/>
 ## Installation
 
 ```
-[[tool.poetry.source]]
-url = "https://pypi.fury.io/codustry/"
-name = "fury"
-
-[tool.poetry.dependencies]
-withings_api = { version = "*", source = "fury" }
+python -m pip install withings_api_cdt
 ```
 
 ## Usage
