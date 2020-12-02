@@ -16,7 +16,6 @@ from typing_extensions import Final
 
 from .common import (
     AuthScope,
-    Credentials,
     GetActivityField,
     GetSleepField,
     GetSleepSummaryField,
@@ -41,6 +40,7 @@ from .common import (
     response_body_or_raise,
     str_or_raise,
 )
+from .models.credentials import Credentials
 from .models.notify import new_notify_get_response, new_notify_list_response, NotifyAppli, NotifyGetResponse, \
     NotifyListResponse
 
@@ -422,7 +422,7 @@ class WithingsApi(AbstractWithingsApi):
             refresh_cb: Optional[Callable[[Credentials], None]] = None,
     ):
         """Initialize new object."""
-        self._credentials = credentials
+        self.credentials = credentials
         self._refresh_cb: Final = refresh_cb
         token: Final = {
             "access_token": credentials.access_token,
@@ -448,7 +448,7 @@ class WithingsApi(AbstractWithingsApi):
 
     def get_credentials(self) -> Credentials:
         """Get the current oauth credentials."""
-        return self._credentials
+        return self.credentials
 
     def refresh_token(self) -> None:
         """Manually refresh the token."""
@@ -459,19 +459,19 @@ class WithingsApi(AbstractWithingsApi):
 
     def _update_token(self, token: Dict[str, Union[str, int]]) -> None:
         """Set the oauth token."""
-        self._credentials = Credentials(
+        self.credentials = Credentials(
                 access_token=str_or_raise(token.get("access_token")),
                 token_expiry=arrow.utcnow().timestamp
                              + int_or_raise(token.get("expires_in")),
-                token_type=self._credentials.token_type,
+                token_type=self.credentials.token_type,
                 refresh_token=str_or_raise(token.get("refresh_token")),
-                userid=self._credentials.userid,
-                client_id=self._credentials.client_id,
-                consumer_secret=self._credentials.consumer_secret,
+                userid=self.credentials.userid,
+                client_id=self.credentials.client_id,
+                consumer_secret=self.credentials.consumer_secret,
         )
 
         if self._refresh_cb:
-            self._refresh_cb(self._credentials)
+            self._refresh_cb(self.credentials)
 
     def _request(
             self, path: str, params: Dict[str, Any], method: str = "GET"
@@ -484,3 +484,7 @@ class WithingsApi(AbstractWithingsApi):
                         params=params,
                 ).json(),
         )
+
+    @property
+    def token_expired(self):
+        return self.credentials.is_expired

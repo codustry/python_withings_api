@@ -23,6 +23,7 @@ from arrow import Arrow
 from dateutil import tz
 from typing_extensions import Final
 
+from . import Credentials
 from .const import (
     STATUS_AUTH_FAILED,
     STATUS_BAD_STATE,
@@ -410,18 +411,6 @@ class HeartListResponse(NamedTuple):
     more: bool
     offset: int
     series: Tuple[HeartListSerie, ...]
-
-
-class Credentials(NamedTuple):
-    """Credentials."""
-
-    access_token: str
-    token_expiry: int
-    token_type: str
-    refresh_token: str
-    userid: int
-    client_id: str
-    consumer_secret: str
 
 
 GenericType = TypeVar("GenericType")

@@ -8,11 +8,10 @@ import arrow
 import pytest
 import responses
 from typing_extensions import Final
-from withings_api import NotifyAppli, NotifyGetResponse, NotifyListResponse, WithingsApi, WithingsAuth
+from withings_api import Credentials, NotifyAppli, NotifyGetResponse, NotifyListResponse, WithingsApi, WithingsAuth
 from withings_api.common import (
     AfibClassification,
     AuthScope,
-    Credentials,
     GetActivityField,
     GetSleepField,
     GetSleepSummaryData,
