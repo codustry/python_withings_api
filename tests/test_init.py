@@ -8,7 +8,8 @@ import arrow
 import pytest
 import responses
 from typing_extensions import Final
-from withings_api import Credentials, NotifyAppli, NotifyGetResponse, NotifyListResponse, WithingsApi, WithingsAuth
+from withings_api import Credentials, NotifyAppli, NotifyGetResponse, NotifyListResponseBody, WithingsAuth
+from withings_api.api import WithingsApi
 from withings_api.common import (
     AfibClassification,
     AuthScope,
@@ -41,7 +42,7 @@ from withings_api.common import (
     UserGetDeviceDevice,
     UserGetDeviceResponse,
 )
-from withings_api.models.notify import NotifyListProfile
+from withings_api.models.notify import NotifyConfigList
 
 from .common import TIMEZONE0, TIMEZONE1, TIMEZONE_STR0, TIMEZONE_STR1
 
@@ -839,15 +840,15 @@ def test_notify_list(withings_api: WithingsApi) -> None:
     """Test function."""
     responses_add_notify_list()
 
-    assert withings_api.notify_list() == NotifyListResponse(
+    assert withings_api.notify_list() == NotifyListResponseBody(
         profiles=(
-            NotifyListProfile(
+            NotifyConfigList(
                 appli=NotifyAppli.WEIGHT,
                 callbackurl="http://localhost/callback",
                 comment="fake_comment1",
                 expires=None,
             ),
-            NotifyListProfile(
+            NotifyConfigList(
                 appli=NotifyAppli.CIRCULATORY,
                 callbackurl="http://localhost/callback2",
                 comment="fake_comment2",

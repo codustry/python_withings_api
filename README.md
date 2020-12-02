@@ -18,7 +18,8 @@ python -m pip install withings_api_cdt
 ## Usage
 For a complete example, checkout the integration test in `scripts/integration_test.py`. It has a working example on how to use the API.
 ```python
-from withings_api import WithingsAuth, WithingsApi, AuthScope
+from withings_api import WithingsAuth,  AuthScope
+from withings_api.api import WithingsApi
 from withings_api.common import get_measure_value, MeasureType
 
 auth = WithingsAuth(

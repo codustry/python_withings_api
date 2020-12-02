@@ -10,7 +10,8 @@ from urllib import parse
 import arrow
 from oauthlib.oauth2.rfc6749.errors import MissingTokenError
 from typing_extensions import Final
-from withings_api import AuthScope, Credentials, WithingsApi, WithingsAuth
+from withings_api import AuthScope, Credentials, WithingsAuth
+from withings_api.api import WithingsApi
 
 CREDENTIALS_FILE: Final = path.abspath(
     path.join(path.dirname(path.abspath(__file__)), "../.credentials")
