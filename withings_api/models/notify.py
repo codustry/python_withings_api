@@ -96,7 +96,7 @@ class NotifyFormBase(BaseModel):
     """
     the form data notify webhook will be received
     """
-    userid: str
+    userid: int
     appli: NotifyAppli
 
 
@@ -131,7 +131,7 @@ class SleepEventNotifyForm(InstantaneousMixin, NotifyFormBase):
 
 class UnifiedNotifyWebhook(BaseModel):
     """  """
-    userid: str
+    userid: int
     appli: NotifyAppli
 
     # applies to user.metrics [1,2] users.activity[44]
